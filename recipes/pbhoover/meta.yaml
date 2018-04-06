@@ -13,6 +13,7 @@ requirements:
   build:
     - python # [py27]
     - setuptools
+    - setuptools_scm
     - argparse
     - pbcore
     - pbh5tools
