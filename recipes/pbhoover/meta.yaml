@@ -1,0 +1,58 @@
+{% set version = "1.0.6" %}
+
+package:
+  name: pbhoover
+  version: {{ version }}
+
+source:
+  fn: pbhoover-{{ version }}.tar.gz
+  url: https://gitlab.com/LPCDRP/pbhoover/repository/{{ version }}/archive.tar.gz
+  sha256: 78e8dd082fd63d4cea53c3021339b97dc3fcf8da8cb25d8c34580a65b0e045ff
+
+build:
+  skip: True # [not py27]
+
+requirements:
+  build:
+    - python # [py27]
+    - setuptools
+    - setuptools_scm
+    - argparse
+    - pbcore >=1.2.10
+    - pbh5tools
+    - numpy
+    - pyvcf
+
+  run:
+    - python # [py27]
+    - pbh5tools
+    - tabix
+    - htslib
+    - samtools
+    - bcftools
+    - argparse
+    - pyvcf
+    - pbcore >=1.2.10
+    - numpy
+
+test:
+  requires:
+    - nose
+
+  imports:
+    - unittest
+    - pysam
+    - csv
+
+  source_files:
+    - pbhoover/tests/
+    - pbhoover/
+
+  commands:
+    - pbhoover -h
+
+about:
+  home: https://gitlab.com/LPCDRP/pbhoover
+  license: GPLv3
+  license_file: LICENSE
+  summary: "Variant caller for legacy and low coverage Pacific Biosciences' long-read sequencing data"
